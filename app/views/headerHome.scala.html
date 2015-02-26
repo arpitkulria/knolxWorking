@@ -1,0 +1,36 @@
+@* header Template File *@
+
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+     		 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+       			 <span class="sr-only">Toggle navigation</span>
+       			 <span class="icon-bar"></span>
+      			 <span class="icon-bar"></span>
+     			 <span class="icon-bar"></span>
+     		 </button>
+     <a class="navbar-brand" href="@routes.Application.index">Knolx</a>
+    </div>
+
+   
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">List Of Sessions<span class="sr-only">(current)</span></a></li>
+        <li><a href="@routes.Application.updateUser">Update Profile</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="@routes.Application.logOut">Log Out</a></li>
+      </ul>
+      	<div style="float: right;">
+      		<form class="navbar-form navbar-left" role="search" method="get" action="/findEmp">
+      		   		<div class="form-group" align="right">
+          			<input type="text" name="search" id="findEmpBox" class="form-control" placeholder="Search Sessions" data-ng-model="searchInList">
+        		</div>
+        	
+        	<div class="form-group" align="right">
+        	
+       <input class="btn btn-default" type="submit" value="Search">>
+        	</div>
+        	</form>
+       </div>
+     </div>
+</nav>
