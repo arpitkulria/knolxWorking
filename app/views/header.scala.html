@@ -8,14 +8,16 @@
       			 <span class="icon-bar"></span>
      			 <span class="icon-bar"></span>
      		 </button>
-     <a class="navbar-brand" href="@routes.Application.index">Knolx</a>
+    	
     </div>
 
    
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+      <li><img src=@routes.Assets.at("/images/knolx.jpg") width="70%" height="60%"></li>
+       <li><a href="@routes.Application.index">Home</a> </li>
         <li><a href="@routes.Application.loginForm">Login or Register <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">List Of Sessions</a></li>
+        <li><a href="@routes.Application.index">List Of Sessions</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Help</a></li>
       </ul>
@@ -25,10 +27,9 @@
           			<input type="text" name="search" id="findEmpBox" class="form-control" placeholder="Search Sessions" data-ng-model="searchInList">
         		</div>
         	
-        	<div class="form-group" align="right">
-        	
-       <input class="btn btn-default" type="submit" value="Search">>
-        	</div>
+        		<div class="form-group" align="right">
+        				<input class="btn btn-default" type="submit" value="Search">>
+        		</div>
         	</form>
        </div>
      </div>

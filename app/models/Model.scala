@@ -8,13 +8,19 @@ import play.api.db.slick.Config.driver.simple._
 import java.sql.Timestamp
 
 /**
+ * Model
  * @author knoldus
  */
+
 object Model extends App {
 
   implicit lazy val util2sqlDateMapper = MappedColumnType.base[java.util.Date, java.sql.Date](
     { utilDate => new java.sql.Date(utilDate.getTime()) },
     { sqlDate => new java.util.Date(sqlDate.getTime()) })
+
+  /**
+   * Class for mapping to database table
+   */
 
   class KnolxTable(tag: Tag) extends Table[Knolx](tag, "knolx") {
     def knolx_id: Column[Int] = column[Int]("knolx_id", O.PrimaryKey, O.AutoInc)
@@ -33,48 +39,51 @@ object Model extends App {
   }
 
   /**
-   * @param knolObj
-   * @param s
-   */
-
-  /**
+   * function to update data
+   *
+   * @param id
+   * @param knolxObj
    * @param s
    * @return
    */
-  /*def showEmp(page:Int,pageSize:Int,filter:String,total:Int)(implicit s: Session):List[Knol]={
-    val knolTableQueryObj = TableQuery[KnolTable]
-    val offset=pageSize * page
-     knolTableQueryObj.filter(_.name.toUpperCase like filter.toUpperCase).drop(offset).take(pageSize).list
-    
-  }*/
-
-  /*def deleteEmpfromDB(id:Int)(implicit s: Session):Int={
-    val knolTableQueryObj = TableQuery[KnolTable]
-     knolTableQueryObj.filter(_.knol_id===id).delete 
-  }*/
-  /*def findEmpfromDB(name:String)(implicit s: Session):List[Knol]={
-    val knolTableQueryObj = TableQuery[KnolTable]
-   
-     knolTableQueryObj.filter(_.name.toUpperCase like "%"+name.toUpperCase()+"%").list
-  }*/
-
   def updateUserData(id: Int, knolxObj: Knolx)(implicit s: Session): Int = {
     val knolxTableQueryObj = TableQuery[KnolxTable]
     knolxTableQueryObj.filter(_.knolx_id === id).update(knolxObj)
   }
-
+  /**
+   * function to validate user
+   *
+   * @param obj
+   * @param s
+   * @return
+   */
   def checkUserFunction(obj: KnolxSignIn)(implicit s: Session): Int = {
     val knolxTableQueryObj = TableQuery[KnolxTable]
 
     knolxTableQueryObj.filter(x => x.emailid === obj.emailid && x.password === obj.password).list.length
 
   }
+
+  /**
+   * Function to add new user
+   *
+   * @param knolObj
+   * @param s
+   * @return
+   */
   def addUserFunction(knolObj: Knolx)(implicit s: Session): Int = {
     val knolxTableQueryObj = TableQuery[KnolxTable]
     knolxTableQueryObj.insert(knolObj)
 
   }
 
+  /**
+   * Function to get knolx object by email ID
+   *
+   * @param email
+   * @param s
+   * @return
+   */
   def fillForm(email: String)(implicit s: Session): List[Knolx] = {
     val knolxTableQueryObj = TableQuery[KnolxTable]
 
@@ -82,16 +91,29 @@ object Model extends App {
 
   }
 
+  /**
+   * Function to update user information
+   *
+   * @param obj
+   * @param s
+   * @return
+   */
   def updateUserFunction(obj: Knolx)(implicit s: Session): Int = {
 
     val knolxTableQueryObj = TableQuery[KnolxTable]
-    //knolxTableQueryObj.filter(_.knolx_id===obj.knolx_id).delete 
-    //knolxTableQueryObj.insert(obj)
     knolxTableQueryObj.filter { _.knolx_id === obj.knolx_id }.update(obj)
 
   }
 
 }
+
+/**
+ * case class for knolx (for add user and update user data)
+ */
+
 case class Knolx(name: String, address: String, password: String, company: String, emailid: String, phone: String, created: Date = new Date(), updated: Date = new Date(), userType: Int = 2, knolx_id: Int = 0)
 
+/**
+ * case class for add user and update user data)
+ */
 case class KnolxSignIn(emailid: String, password: String)

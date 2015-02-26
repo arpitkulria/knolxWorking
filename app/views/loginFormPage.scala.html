@@ -1,181 +1,141 @@
 @* loginForm Template File *@
-@(formData:Form[Knolx])
+@(formData:Form[Knolx])(implicit flash:play.api.mvc.Flash)
 
 @import helper._
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f)}
 @main("index","index",0,30) {
 	
-@*	@flash.get("Success").map { message =>
+	@flash.get("msg").map { msg =>
             <div class="alert alert-dismissable alert-success">
                 <button type="button" class="close" data-dismiss="close">×</button>
-                <strong>Well done!</strong> @message
+                <strong>Well done !</strong> @msg
             </div>
         }
+      @flash.get("error").map { msg =>
+            <div class="alert alert-dismissable alert-warning">
+                <button type="button" class="close" data-dismiss="close">×</button>
+                <strong>Error ! </strong> @msg
+            </div>
+        }  
         
-   *@
+        
+  
 	
 	
 	
-       <div class="container">    
-        <div  id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-info"  >
+<div class="container">    
+   <div  id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+       <div class="panel panel-info"  >
             <div style="background-color:#2c3e50">
-                    <div class="panel-heading">
-                        <div class="panel-title" style="color: white;">Sign In</div>
+                 <div class="panel-heading">
+                     <div class="panel-title" style="color: white;">Sign In</div>
                         <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
-                    </div>     
+                 </div>     
 			</div>
-                    <div style="padding-top:30px" class="panel-body" >
-
-                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+			
+            <div style="padding-top:30px" class="panel-body" >
+                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                      @form(routes.Application.checkUser){
+			               <div style="margin-bottom: 25px" class="input-group">
+                                 @inputText(formData("emailid"), '_label -> "Email - ID",'class->"form-control")
+                           </div>
                             
-                        
-                        
-                        @form(routes.Application.checkUser){
-                                   
-                            <div style="margin-bottom: 25px" class="input-group">
-                                      
-                                      
-                                         @inputText(formData("emailid"), '_label -> "Email ID",'class->"form-control")
-                                                                               
-                                 
-                                 </div>
-                            <div style="margin-bottom: 25px" class="input-group">
-                                       
-                                         @inputPassword(formData("password"), '_label -> "Password",'class->"form-control")
-                                        
-                                    </div>
-                                    
-
-                                
-                            <div class="input-group">
-                                      <div class="checkbox">
-                                        <label>
-                                          <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-                                        </label>
-                                      </div>
-                                    </div>
-
-
-                                <div style="margin-top:10px" class="form-group">
-                                    <!-- Button -->
-
-                                    <div class="col-sm-12 controls">
-                                    <button id="btn-signin" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> Log In</button>
-                                      
-                                    
-
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <div class="col-md-12 control">
-                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
-                                            Don't have an account! 
-                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                            Sign Up Here
-                                        </a>
-                                        </div>
-                                    </div>
-                                </div>    
-                            }    
-
-
-
-                        </div>                     
-                    </div>  
-        </div>
-        <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                    <div class="panel panel-info">
-                    <div style="background-color:#2c3e50">
-                        <div class="panel-heading" sty>
-                        
-                            <div class="panel-title" style="color: white;">Sign Up</div>
-                            <div style="float:right;  font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
-                        </div>  
+               			   <div style="margin-bottom: 25px" class="input-group">
+                       			 @inputPassword(formData("password"), '_label -> "Password",'class->"form-control")
+                		   </div>
+                 
+                 <div class="input-group">
+                       <div class="checkbox">
+                             <label>
+                                    <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                             </label>
                         </div>
-                        <div class="panel-body" >
-                           
-                           
-                           
-                           
-                           
-                          
-                                
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                    
-                                
-                                @form(routes.Application.addUser){
-                                    
-                                <div class="form-group">
-                                   
-                                    <div class="col-md-9">
-                                    @inputText(formData("name"), '_label -> "Name",'class->"form-control")
-                                       
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                   <div class="col-md-9">
-                                    @inputText(formData("address"), '_label -> "Address",'class->"form-control")
-                                        
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    
-                                    <div class="col-md-9">
-                                    @inputText(formData("password"), '_label -> "Password",'class->"form-control")
-                                        
-                                    </div>
-                                </div>
-                                    
-                                <div class="form-group">
-                                    
-                                    <div class="col-md-9">
-                                    @inputText(formData("company"), '_label -> "Company",'class->"form-control")
-                                       
-                                    </div>
-                                </div>
-                                 <div class="form-group">
-                                    
-                                    <div class="col-md-9">
-                                    @inputText(formData("emailid"), '_label -> "Email ID",'class->"form-control")
-                                       
-                                    </div>
-                                </div>
-                                 <div class="form-group">
-                                    
-                                    <div class="col-md-9">
-                                    @inputText(formData("phone"), '_label -> "Phone No",'class->"form-control")
-                                       
-                                    </div>
-                                </div>
-                                
-                                 
-                                <div class="form-group">
-                                    <!-- Button -->                                        
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
-                                          
-                                    </div>
-                                </div>
-                                
-                                
-                                
-                                
-                                
-                           }
-                         </div>
+                 </div>
+                  <div style="margin-top:10px" class="form-group">
+                 <!-- Button -->
+                   		<div class="col-sm-12 controls">
+               				 <button id="btn-signin" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> Log In</button>
+                     	 </div>
+           		</div>
+           		<br><br><br>
+           		
+                <div class="form-group">
+                     <div class="col-md-12 control">
+                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+      		                    Don't have an account! 
+             				        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                          				Sign Up Here
+                      				</a>
+                   		</div>
+               		</div>
+        		</div>    
+         }    
+        </div>                     
+    </div>  
+ </div>
+ 
+ <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+     <div class="panel panel-info">
+         <div style="background-color:#2c3e50">
+             <div class="panel-heading" sty>
+                  <div class="panel-title" style="color: white;">Sign Up</div>
+                      <div style="float:right;  font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                      </div>  
+                  </div>
+ 
+             <div class="panel-body" >
+             <div id="signupalert" style="display:none" class="alert alert-danger">
+                  <p>Error:</p>
+             </div>
+                  @form(routes.Application.addUser){
+              <div class="form-group">
+                   <div class="col-md-9">
+                        @inputText(formData("name"), '_label -> "Name",'class->"form-control")
+                   </div>
+              </div>
+ 
+              <div class="form-group">
+                  <div class="col-md-9">
+        		         @inputText(formData("address"), '_label -> "Address",'class->"form-control")
+                  </div>
+              </div>
+ 
+              <div class="form-group">
+                   <div class="col-md-9">
+              			@inputText(formData("password"), '_label -> "Password",'class->"form-control")
+                   </div>
+             </div>
+ 
+             <div class="form-group">
+                 <div class="col-md-9">
+                		@inputText(formData("company"), '_label -> "Company",'class->"form-control")
+                 </div>
+             </div>
+ 
+             <div class="form-group">
+                	<div class="col-md-9">
+               			@inputText(formData("emailid"), '_label -> "Email ID",'class->"form-control")
                     </div>
-
-               
-               
-                
-         </div> 
-    </div>
+             </div>
+ 
+             <div class="form-group">
+                 <div class="col-md-9">
+               			@inputText(formData("phone"), '_label -> "Phone No",'class->"form-control")
+                 </div>
+             </div>
+ 
+             <div class="form-group">
+             <!-- Button -->                                        
+             	<div class="col-md-offset-3 col-md-9">
+                  <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+                </div>
+             </div>
+           }
+        </div>
+     </div>
+  </div> 
+</div>
     
 }
+

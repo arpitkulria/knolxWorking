@@ -1,13 +1,11 @@
 @* outputPage Template File *@
-@(param: Any)
+@(param: String)
 
-
-@*
-@session.get("Org")
-*@
 @mainHome("Home","Home",0,30){
 	
-<h1>@param </h1>
-	
+<h1>@param.split("@").head</h1>
+	<div class="col-md-12">
+	@*	<img src=@routes.Assets.at("/images/0db0f52.png")> *@
+	</div>
 }
 

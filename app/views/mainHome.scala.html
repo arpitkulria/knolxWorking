@@ -8,20 +8,24 @@
 .hid{
 visibility: hidden;
 }</style>
-        @title(titleName)
+        	@title(titleName)
     	@styles(titleName)
  <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-2.1.3.min.js")"></script>
+ 
 @*<link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap"))">*@
 @*<script src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))"></script>*@
 
     	
     </head>
-    <body class="container" onload="disable(pageInit,total)">
-    	@headerHome()
-    	@*@sidebar()*@
-    	@content
-    	@footer()
+    <body>
+    	<div class="container" >
+    		@headerHome()
+    		@*@sidebar()*@
+    		@content
+    	
+    	<div style="position: fixed; bottom: 0%; ">@footer()</div>
+    	
     	@scripts(titleName)
+    	</div>
     </body>
 </html>
-

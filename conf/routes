@@ -4,14 +4,27 @@
 
 # Home page
 GET   /                 controllers.Application.index
+
 GET   /addUser          controllers.Application.addUser
+
 GET   /checkUser        controllers.Application.checkUser
+
 #GET   /outputPage         controllers.Application.outputPage
+
 GET   /loginForm        controllers.Application.loginForm
+
 GET   /home             controllers.Application.home
+
 GET   /updateUserInfo   controllers.Application.updateUserInfo
+
 GET   /updateUser   controllers.Application.updateUser
+
 GET   /logOut   controllers.Application.logOut
+
+GET   /listOfSession   controllers.Application.listOfSession
+
 # Map static resources from the /public folder to the /assets URL path
+
 GET   /assets/*file     controllers.Assets.at(path="/public", file)
+
 GET   /webjars/*file    controllers.WebJarAssets.at(file)
