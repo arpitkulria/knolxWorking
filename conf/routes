@@ -17,11 +17,11 @@ GET   /home             controllers.Application.home
 
 GET   /updateUserInfo   controllers.Application.updateUserInfo
 
-GET   /updateUser   controllers.Application.updateUser
+GET   /updateUser       controllers.Application.updateUser
 
-GET   /logOut   controllers.Application.logOut
+GET   /logOut           controllers.Application.logOut
 
-GET   /listOfSession   controllers.Application.listOfSession
+GET   /listOfSession    controllers.Application.listOfSession
 
 # Map static resources from the /public folder to the /assets URL path
 

@@ -57,13 +57,11 @@ object Application extends Controller {
    */
   def loginForm: Action[AnyContent] = Action { implicit rs =>
 
-    
-    
-    rs.session.get("usr").map { usr =>
+   // rs.session.get("usr").map { usr =>
       Ok(views.html.loginFormPage(formForSignUp))
-    }.getOrElse {
-      Ok(views.html.index())
-    }
+    //}.getOrElse {
+     // Ok(views.html.index())
+   // }
    
   }
   /**
@@ -152,7 +150,7 @@ object Application extends Controller {
    */
   def logOut: Action[AnyContent] = Action {
 
-    Redirect(routes.Application.index).withNewSession
+    Redirect(routes.Application.loginForm).withNewSession.flashing("msg" -> "Successfully Logged out")
 
   }
 
