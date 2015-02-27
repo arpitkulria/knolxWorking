@@ -35,15 +35,22 @@
 			</div>
 			
             <div style="padding-top:30px" class="panel-body" >
-                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                      @form(routes.Application.checkUser){
-			               <div style="margin-bottom: 25px" class="input-group">
-                                 @inputText(formData("emailid"), '_label -> "Email - ID",'class->"form-control")
+               @*  <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div> *@
+                     
+                     
+                      @form(routes.Application.checkUser,'id->"logInForm"){
+			               <div style="margin-bottom: 25px" class="form-group row">
+			               		<div class="col-md-12">
+                                 @inputText(formData("emailid"), '_label -> "Email - ID",'class->"form-control",'id->"emailid",'name->"emailid")
+                           </div>
                            </div>
                             
-               			   <div style="margin-bottom: 25px" class="input-group">
-                       			 @inputPassword(formData("password"), '_label -> "Password",'class->"form-control")
+               			   <div style="margin-bottom: 25px" class="form-group row">
+               			   		<div class="col-md-12">
+                       			 @inputPassword(formData("password"), '_label -> "Password",'class->"form-control",'id->"password",'name->"password")
+                		   		</div>
                 		   </div>
+                		   
                  
                  <div class="input-group">
                        <div class="checkbox">
@@ -88,40 +95,40 @@
              <div id="signupalert" style="display:none" class="alert alert-danger">
                   <p>Error:</p>
              </div>
-                  @form(routes.Application.addUser){
+                  @form(routes.Application.addUser,'id->"signUpForm"){
               <div class="form-group">
                    <div class="col-md-9">
-                        @inputText(formData("name"), '_label -> "Name",'class->"form-control")
+                        @inputText(formData("name"), '_label -> "Name",'class->"form-control",'name->"name")
                    </div>
               </div>
  
               <div class="form-group">
                   <div class="col-md-9">
-        		         @inputText(formData("address"), '_label -> "Address",'class->"form-control")
+        		         @inputText(formData("address"), '_label -> "Address",'class->"form-control",'name->"address")
                   </div>
               </div>
  
               <div class="form-group">
                    <div class="col-md-9">
-              			@inputText(formData("password"), '_label -> "Password",'class->"form-control")
+              			@inputText(formData("password"), '_label -> "Password",'class->"form-control",'name->"password")
                    </div>
              </div>
  
              <div class="form-group">
                  <div class="col-md-9">
-                		@inputText(formData("company"), '_label -> "Company",'class->"form-control")
+                		@inputText(formData("company"), '_label -> "Company",'class->"form-control",'name->"company")
                  </div>
              </div>
  
              <div class="form-group">
                 	<div class="col-md-9">
-               			@inputText(formData("emailid"), '_label -> "Email ID",'class->"form-control")
+               			@inputText(formData("emailid"), '_label -> "Email ID",'class->"form-control",'name->"emailid")
                     </div>
              </div>
  
              <div class="form-group">
                  <div class="col-md-9">
-               			@inputText(formData("phone"), '_label -> "Phone No",'class->"form-control")
+               			@inputText(formData("phone"), '_label -> "Phone No",'class->"form-control",'name->"phone")
                  </div>
              </div>
  
@@ -136,6 +143,12 @@
      </div>
   </div> 
 </div>
+
+
+
     
 }
+
+
+
 
